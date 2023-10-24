@@ -1,0 +1,15 @@
+.footer {
+    background-color: #4A3D3D; /* Color de fondo #4A3D3D */
+    color: #FFD9D9; /* Color de letra #FFD9D9 */
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    padding: 10px 20px;
+    gap: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .devs {
+    display: flex;
+    flex-direction: column;
+  }
+

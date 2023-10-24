@@ -1,22 +1,14 @@
 import React from 'react'
+import styles from './question.module.css';
 
 function Question() {
   return (
     <>
-    <section className='question'>
+    <section className={styles.question}>
         <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Id in, omnis natus voluptate pariatur, 
             dolorem assumenda eum provident esse nam impedit fuga temporibus? Dolores, assumenda natus!
         </p>
-    </section>
-
-    <section className='options'>
-        <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores velit saepe numquam ex quos.
-        </p>
-        <button>
-            Responder
-        </button>
     </section>
 
     </>
