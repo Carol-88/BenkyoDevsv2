@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './question.module.css';
 
-function Question() {
+const Question = () => {
   return (
     <>
     <section className={styles.question}>

@@ -1,16 +1,14 @@
-import React from 'react'
-import Game from './Game'
-import Header from '@/components/header/Header'
-import Footer from '@/components/footer/Footer'
+// Archivo pages/index.js
 
-function App() {
+import React from 'react';
+import App from './App';
+
+const Home = () => {
   return (
-    <>       
-      <Header/>
-      <Game/>          
-      <Footer/>
-    </>
-  )
-}
+    <div>
+        <App/>
+    </div>
+  );
+};
 
-export default App
+export default Home;

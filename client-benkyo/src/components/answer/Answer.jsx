@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './answer.module.css'
 
-function Answer() {
+const Answer = () => {
   return (
     <section className={styles.options}>
     <div className={styles.text}>

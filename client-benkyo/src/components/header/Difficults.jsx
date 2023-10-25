@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Difficults() {
+const Difficults = () => {
   return (
     <div>Difficults</div>
   )
