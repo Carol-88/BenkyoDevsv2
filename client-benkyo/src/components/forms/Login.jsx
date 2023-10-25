@@ -2,11 +2,10 @@ import { useState, useContext } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
-
-// Crear el AuthContext
-const AuthContext = createContext();
+import { AuthContext } from './AuthContext';
 
 export default function Login() {
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -15,18 +14,17 @@ export default function Login() {
 
   const router = useRouter();
   
-  // Validación del formulario
   const schema = Yup.object().shape({
     email: Yup.string().email().required(),
     password: Yup.string().min(8).required(),
   });
 
   const verContraseña = () => {
-      if (pass === 'password') {
-          setPass('text');
-      } else {
-          setPass('password');
-      }
+    if (pass === 'password') {
+        setPass('text');
+    } else {
+        setPass('password');
+    }
   };
 
   const handleForm = async (e) => {
@@ -58,6 +56,7 @@ export default function Login() {
       const user = await response.json();
       console.log(user);
       setSuccess(true);
+      setIsLoggedIn(true);
       router.push('/perfil');
     } catch (error) {
       setError('Error de conexión, por favor intente nuevamente');
