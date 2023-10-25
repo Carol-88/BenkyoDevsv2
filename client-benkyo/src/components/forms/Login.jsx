@@ -1,89 +1,108 @@
-
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Image from 'next/image';
-//import { logInUserService } from "..";
 import { useRouter } from 'next/router';
-//import { AuthContext } from "../";
-//haría falta crear el authcontext
-//los services para recuperar la información del backend
+import * as Yup from 'yup';
+
+// Crear el AuthContext
+const AuthContext = createContext();
 
 export default function Login() {
-    //const navigate = useNavigate();
-    //const { login } = useContext(AuthContext);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [pass, setPass] = useState('password');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [pass, setPass] = useState('password');
 
-    const router = useRouter();
-    const verContraseña = () => {
-        if (pass === 'password') {
-            setPass('text');
-        } else {
-            setPass('password');
-        }
-    };
+  const router = useRouter();
+  
+  // Validación del formulario
+  const schema = Yup.object().shape({
+    email: Yup.string().email().required(),
+    password: Yup.string().min(8).required(),
+  });
 
-    const handleForm = async (e) => {
-        e.preventDefault();
-        try {
-            const user = await fetch(
-                'http://localhost:4000/api/v1/user/login',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email, password }),
-                },
-            ).then((res) => res.json());
+  const verContraseña = () => {
+      if (pass === 'password') {
+          setPass('text');
+      } else {
+          setPass('password');
+      }
+  };
 
-            console.log(user);
-            router.push('/perfil');
-        } catch (error) {
-            setError('Email o password incorrecto', error.message);
-        }
-    };
-    return (
-        <form
-            onSubmit={handleForm}
-        >
-            <Image src={''} width={300} height={200} />
-            <h2>Login</h2>
-            <fieldset>
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="email"
-                    name="email"
-                    value={email}
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </fieldset>
-            <fieldset>
-                <label htmlFor="pass">
-                    Password:
-                    <span
-                        onClick={() => {
-                            verContraseña();
-                        }}
-                    >
-                        {' '}
-                        {pass == 'text' ? '🔒' : '👀'}
-                    </span>
-                </label>
-                <input
-                    type={pass}
-                    name="pass"
-                    value={password}
-                    required
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </fieldset>
-            <button>
-                Continuar
-            </button>
-            {error ? <p>{error}</p> : null}
-        </form>
-    );
+  const handleForm = async (e) => {
+    e.preventDefault();
+    const validForm = await schema.isValid({ email, password });
+    if (!validForm) {
+      setError("Por favor, verifica los datos ingresados");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+          'http://localhost:4000/api/v1/user/login',
+          {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ email, password }),
+          },
+      );
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.message);
+        return;
+      }
+
+      const user = await response.json();
+      console.log(user);
+      setSuccess(true);
+      router.push('/perfil');
+    } catch (error) {
+      setError('Error de conexión, por favor intente nuevamente');
+    }
+  };
+
+  return (
+    <form onSubmit={handleForm}>
+      <Image src={''} width={300} height={200} />
+      <h2>Login</h2>
+      <fieldset>
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </fieldset>
+      <fieldset>
+        <label htmlFor="pass">
+          Password:
+          <span
+            onClick={() => {
+              verContraseña();
+            }}
+          >
+            {' '}
+            {pass == 'text' ? '🔒' : '👀'}
+          </span>
+        </label>
+        <input
+          type={pass}
+          name="pass"
+          value={password}
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </fieldset>
+      <button>
+        Continuar
+      </button>
+      {error ? <p>{error}</p> : null}
+      {success && <p>Inicio de sesión exitoso!</p>}
+    </form>
+  );
 }
