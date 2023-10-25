@@ -1,15 +1,12 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
-import { AuthContext } from './AuthContext';
 
 export default function Login() {
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
   const [pass, setPass] = useState('password');
 
   const router = useRouter();
@@ -53,10 +50,7 @@ export default function Login() {
         return;
       }
 
-      const user = await response.json();
-      console.log(user);
-      setSuccess(true);
-      setIsLoggedIn(true);
+      localStorage.setItem('isLoggedIn', 'true');
       router.push('/perfil');
     } catch (error) {
       setError('Error de conexión, por favor intente nuevamente');
@@ -101,7 +95,6 @@ export default function Login() {
         Continuar
       </button>
       {error ? <p>{error}</p> : null}
-      {success && <p>Inicio de sesión exitoso!</p>}
     </form>
   );
 }

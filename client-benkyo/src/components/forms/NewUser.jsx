@@ -3,8 +3,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import banner from './img/PropuestaBanner.png';
 import styles from './newuser.module.css'
+import { useRouter } from 'next/router';
 
-function Registro() {
+function NewUser() {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,6 +13,9 @@ function Registro() {
     const [passwordMatch, setPasswordMatch] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [error, setError] = useState('');
+
+    const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,7 +28,7 @@ function Registro() {
 
         const newUserJson = JSON.stringify(newUser);
 
-        const res = await fetch(`${process.env.URL_API}/register`, {
+        const res = await fetch(`${process.env.URL_API}/newuser`, {
             method: 'POST',
             body: newUserJson,
             headers: {
@@ -32,16 +36,14 @@ function Registro() {
             },
         });
 
-        const responseBody = await res.json();
         if (!res.ok) {
-            toast.error(responseBody.message);
+            const errorData = await res.json();
+            setError(errorData.message);
             return;
         }
 
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
+        localStorage.setItem('isLoggedIn', 'true');
+        router.push('/perfil');
     };
 
     return (
