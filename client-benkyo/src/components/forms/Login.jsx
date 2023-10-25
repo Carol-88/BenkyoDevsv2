@@ -1,11 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
-import { AuthContext } from './AuthContext';
 
 export default function Login() {
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -18,6 +16,7 @@ export default function Login() {
     email: Yup.string().email().required(),
     password: Yup.string().min(8).required(),
   });
+
 
   const verContraseña = () => {
     if (pass === 'password') {
