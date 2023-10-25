@@ -5,7 +5,7 @@ import banner from './img/PropuestaBanner.png';
 import styles from './newuser.module.css'
 import { useRouter } from 'next/router';
 
-function NewUser() {
+const NewUser = () => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -144,4 +144,4 @@ function NewUser() {
     );
 }
 
-export default Registro;
+export default NewUser

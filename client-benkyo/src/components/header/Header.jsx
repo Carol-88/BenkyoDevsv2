@@ -1,25 +1,22 @@
-// Aquí importar el resto de componentes de la carpeta header y linkear css, dejo ejemplo:
-
-import { Link } from 'next/link';
-import User from "./User";
+import {Link} from 'next/link'
 import Language from "./Language";
 import Counter from "./Counter";
 import Difficults from "./Difficults";
+import User from './User';
 
-<link rel="stylesheet" href="" />
-
-function Header() {
-  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+const Header = () => {
+  // const isLoggedIn = typeof window !== 'undefined' && localStorage.getItem('isLoggedIn') === 'true';
 
   return (
     <>
-      {isLoggedIn ? (
+      {/* {isLoggedIn ? (
         <User/>
       ) : (
         <>
-          <Link href="/login">Login</Link> || <Link href="/registro">Registro</Link>
+          <Link href="/loginpage">Login</Link>
+          <Link href="/newuser">Registro</Link>
         </>
-      )}
+      )} */}
       <Language/>
       <Counter/>
       <Difficults/>
@@ -28,3 +25,4 @@ function Header() {
 }
 
 export default Header;
+
