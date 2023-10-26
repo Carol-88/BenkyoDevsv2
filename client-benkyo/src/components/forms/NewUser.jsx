@@ -153,6 +153,7 @@ import styles from './newuser.module.css';
 import { useRouter } from 'next/router';
 
 const NewUser = () => {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -167,6 +168,7 @@ const NewUser = () => {
     e.preventDefault();
 
     const newUser = {
+      name: name,
       username: username,
       email: email,
       password: password,
@@ -174,7 +176,7 @@ const NewUser = () => {
 
     const res = await fetch(`${process.env.URL_API}/register`, {
       method: 'POST',
-      body: JSON.stringify(newUser),
+      body: JSON.stringify(name, username, email, password),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -197,7 +199,18 @@ const NewUser = () => {
         <h2> Regístrate </h2>
 
         <form onSubmit={handleSubmit}>
-          <div>
+        <div>
+        <div>
+            <label htmlFor="userform">Name:</label>
+            <input
+              id="name"
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              value={name}
+              required
+            />
+          </div>
+
             <label htmlFor="userform">Username:</label>
             <input
               id="username"
