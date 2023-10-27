@@ -10,7 +10,6 @@ const App = () => {
       <Header/>
       <Game/>          
       <Footer/>
-      
     </div>
   )
 }
