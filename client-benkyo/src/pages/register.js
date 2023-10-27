@@ -1,8 +1,8 @@
 
 import NewUser from '@/components/forms/NewUser'
 
-const NewUser = () => {
+const Register = () => {
   return <NewUser/>
 }
 
-export default NewUser
+export default Register

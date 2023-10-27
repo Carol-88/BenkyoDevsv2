@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import banner from './img/PropuestaBanner.png';
-import styles from './newuser.module.css';
-import { useRouter } from 'next/router';
+// import Image from 'next/image';
+// import banner from './img/PropuestaBanner.png';
+// import styles from './newuser.module.css';
+// import { useRouter } from 'next/router';
 
 const NewUser = () => {
-  const [name, setName] = useState('')
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [error, setError] = useState('');
-  const router = useRouter();
+  // const [error, setError] = useState('');
+  // const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,28 +28,32 @@ const NewUser = () => {
       password: password,
     };
 
-    const res = await fetch(`${process.env.URL_API}/register`, {
-      method: 'POST',
-      body: JSON.stringify(name, username, email, password),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    try {
+      const res = await fetch(`${process.env.URL_API}/register`, {
+        method: 'POST',
+        body: JSON.stringify(newUser), // Corrected the parameter here
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    if (!res.ok) {
-      const errorData = await res.json();
-      setError(errorData.message);
-      return;
+      if (!res.ok) {
+        const errorData = await res.json();
+        setError(errorData.message);
+        return;
+      }
+
+      localStorage.setItem('isLoggedIn', 'true');
+      // router.push('/perfil');
+    } catch (error) {
+      console.error('Ha ocurrido un error:', error);
     }
-
-    localStorage.setItem('isLoggedIn', 'true');
-    router.push('/perfil');
   };
 
   return (
     <>
       <div>
-        <Image src={banner} width={300} height={200} />
+        {/* <Image src={banner} width={300} height={200} /> */}
         <h2> Regístrate </h2>
 
         <form onSubmit={handleSubmit}>
@@ -129,7 +134,7 @@ const NewUser = () => {
         <div>
           <p>
             ¿Tienes una cuenta?
-            <Link href="/login"> Inicia sesión</Link>
+            <Link href="/loginpage"> Inicia sesión</Link>
           </p>
         </div>
       </div>

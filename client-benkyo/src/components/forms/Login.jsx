@@ -7,43 +7,33 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [pass, setPass] = useState('password');
+  const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
-  
+
   const schema = Yup.object().shape({
-    email: Yup.string().email().required(),
-    password: Yup.string().min(8).required(),
+    email: Yup.string().email('Ingresa un email válido').required('El email es requerido'),
+    password: Yup.string().min(8, 'La contraseña debe tener al menos 8 caracteres').required('La contraseña es requerida'),
   });
 
-  const verContraseña = () => {
-    if (pass === 'password') {
-        setPass('text');
-    } else {
-        setPass('password');
-    }
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleForm = async (e) => {
     e.preventDefault();
-    const validForm = await schema.isValid({ email, password });
-    if (!validForm) {
-      setError("Por favor, verifica los datos ingresados");
-      return;
-    }
 
     try {
-      const response = await fetch(
-          `${process.env.URL_API}/login`,
-          {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ email, password }),
-          },
-      );
-      
+      await schema.validate({ email, password });
+
+      const response = await fetch(`${process.env.URL_API}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
       if (!response.ok) {
         const errorData = await response.json();
         setError(errorData.message);
@@ -53,7 +43,7 @@ const Login = () => {
       localStorage.setItem('isLoggedIn', 'true');
       router.push('/perfil');
     } catch (error) {
-      setError('Error de conexión, por favor intente nuevamente');
+      setError(error.message);
     }
   };
 
@@ -72,31 +62,22 @@ const Login = () => {
         />
       </fieldset>
       <fieldset>
-        <label htmlFor="pass">
-          Password:
-          <span
-            onClick={() => {
-              verContraseña();
-            }}
-          >
-            {' '}
-            {pass == 'text' ? '🔒' : '👀'}
-          </span>
+        <label htmlFor="password">
+          Contraseña:
+          <span onClick={toggleShowPassword}>{showPassword ? '🔒' : '👀'}</span>
         </label>
         <input
-          type={pass}
-          name="pass"
+          type={showPassword ? 'text' : 'password'}
+          name="password"
           value={password}
           required
           onChange={(e) => setPassword(e.target.value)}
         />
       </fieldset>
-      <button>
-        Continuar
-      </button>
-      {error ? <p>{error}</p> : null}
+      <button type="submit">Continuar</button>
+      {error && <p>{error}</p>}
     </form>
   );
-}
+};
 
-export default Login
+export default Login;

@@ -1,28 +1,22 @@
-import {Link} from 'next/link'
-import Language from "./Language";
-import Counter from "./Counter";
-import Difficults from "./Difficults";
+
+import Link from 'next/link'
 import User from './User';
+import Language from './Language';
+import Counter from './Counter';
+import Difficults from './Difficults';
 
 const Header = () => {
-  // const isLoggedIn = typeof window !== 'undefined' && localStorage.getItem('isLoggedIn') === 'true';
 
   return (
-    <>
-      {/* {isLoggedIn ? (
-        <User/>
-      ) : (
-        <>
-          <Link href="/loginpage">Login</Link>
-          <Link href="/newuser">Registro</Link>
-        </>
-      )} */}
+    <div>
+      <Link href="/loginpage">Login</Link>
+      <Link href="/register">Registro</Link> 
+      <User/>
       <Language/>
       <Counter/>
       <Difficults/>
-    </>
-  )
-}
+    </div>
+  );
+  };
 
 export default Header;
-
