@@ -7,16 +7,17 @@ import Head from 'next/head'
 
 const App = () => { 
   return (
-    <>
+    <div>
       <Head>
-      <link rel="icon" href='./public/img/favicon' />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href='/icons/favicon' />
       </Head>
-      <body className={styles.globalreset}>       
+      <main className={styles.globalreset}>       
         <Header/>
         <Game/>          
         <Footer/>
-      </body>
-    </>
+      </main>
+    </div>
   )
 }
 

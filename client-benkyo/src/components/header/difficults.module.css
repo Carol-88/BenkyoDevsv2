@@ -1,0 +1,14 @@
+.difficults {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .hoverdiff:hover {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease-in-out;
+  }
+  
+  .hoverdiff {
+    transition: filter 0.3s ease-in-out;
+  }
+  

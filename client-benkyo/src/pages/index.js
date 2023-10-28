@@ -6,9 +6,9 @@ import styles from './global.module.css'
 
 const Home = () => {
   return (
-    <html className={styles.globalreset}>
+    <div className={styles.globalreset}>
         <App/>
-    </html>
+    </div>
   );
 };
 
