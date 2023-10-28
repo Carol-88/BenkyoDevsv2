@@ -2,12 +2,13 @@
 
 import React from 'react';
 import App from './App';
+import styles from './global.module.css'
 
 const Home = () => {
   return (
-    <div>
+    <html className={styles.globalreset}>
         <App/>
-    </div>
+    </html>
   );
 };
 
