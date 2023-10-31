@@ -1,0 +1,62 @@
+.tittle {
+    color: #000;
+    background: #fff;
+    mix-blend-mode: multiply;
+    position: relative;
+    font-size: 42px;
+    text-align: center;
+}
+
+.tittle:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgb(247, 168, 168), rgb(120, 184, 211));
+    mix-blend-mode: screen; 
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.btngrad {
+    background-image: linear-gradient(to right, #f1a9b2 0%, #bfe9ff  51%, #ff6e7f  100%);
+    margin: 10px;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+    border-color: #eaa6a6;
+    display: block;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.btngrad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    border-color: #80b4df;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Esto centra el formulario verticalmente en la pantalla */
+}
+
+.fields {
+    border: none;
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+}

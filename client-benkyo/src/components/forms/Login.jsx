@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
+import styles from './login.module.css'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -48,33 +49,34 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleForm}>
-      <Image src={''} width={300} height={200} />
-      <h2>Login</h2>
-      <fieldset>
-        <label htmlFor="email">Email:</label>
+    <form onSubmit={handleForm} className={styles.formContainer}>
+      <Image src={'/img/PropuestaBanner.png'} width={500} height={200} />
+      <h2 className={styles.tittle}>Login</h2>
+      <fieldset className={styles.fields}>
+        <label htmlFor="email"></label>
         <input
           type="email"
           name="email"
           value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
+          placeholder='Escribe tu email'
         />
       </fieldset>
-      <fieldset>
+      <fieldset className={styles.fields}>
         <label htmlFor="password">
-          Contraseña:
-          <span onClick={toggleShowPassword}>{showPassword ? '🔒' : '👀'}</span>
         </label>
         <input
           type={showPassword ? 'text' : 'password'}
           name="password"
           value={password}
+          placeholder='Escribe tu contraseña'
           required
           onChange={(e) => setPassword(e.target.value)}
         />
+         <span onClick={toggleShowPassword}>{showPassword ? '🔒' : '👀'}</span>
       </fieldset>
-      <button type="submit">Continuar</button>
+      <button className={styles.btngrad} type="submit">Continuar</button>
       {error && <p>{error}</p>}
     </form>
   );
