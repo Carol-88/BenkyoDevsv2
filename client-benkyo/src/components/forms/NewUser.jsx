@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-// import Image from 'next/image';
-// import banner from './img/PropuestaBanner.png';
-// import styles from './newuser.module.css';
-// import { useRouter } from 'next/router';
+import Image from 'next/image';
+import styles from './newuser.module.css';
+import { useRouter } from 'next/router';
 
 const NewUser = () => {
   const [name, setName] = useState('');
@@ -52,47 +51,51 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
     <>
-      <div>
-        {/* <Image src={banner} width={300} height={200} /> */}
-        <h2> Regístrate </h2>
+      <div className={styles.formContainer}>
+        <Image src='/img/PropuestaBanner.png' width={500} height={200} />
+        <h2 className={styles.tittle}> Regístrate </h2>
 
-        <form onSubmit={handleSubmit}>
-        <div>
-        <div>
-            <label htmlFor="userform">Name:</label>
-            <input
-              id="name"
-              onChange={(e) => setName(e.target.value)}
-              type="text"
-              value={name}
-              required
-            />
-          </div>
+        <form onSubmit={handleSubmit} >
+      
+          <fieldset className={styles.fields}>
+              <label htmlFor="userform"></label>
+              <input
+                id="name"
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                value={name}
+                required
+                placeholder='Tu nombre'
+              />
+            </fieldset>
 
-            <label htmlFor="userform">Username:</label>
+            <fieldset className={styles.fields}>
+            <label htmlFor="userform"></label>
             <input
               id="username"
               onChange={(e) => setUsername(e.target.value)}
               type="text"
               value={username}
               required
+              placeholder='Nombre de usuario'
             />
-          </div>
+          </fieldset>
 
-          <div>
-            <label htmlFor="emailform">Email: </label>
+          <fieldset className={styles.fields}>
+            <label htmlFor="emailform"></label>
             <input
               id="email"
               onChange={(e) => setEmail(e.target.value)}
               type="email"
               value={email}
               required
+              placeholder='Tu email'
             />
-          </div>
+          </fieldset>
 
-          <fieldset>
+          <fieldset className={styles.fields}>
             <label htmlFor="password">
-              Password:
+              
               <span onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? '👀' : '🔒'}
               </span>
@@ -103,12 +106,13 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
               value={password}
               required
               onChange={(e) => setPassword(e.target.value)}
+              placeholder='Tu contraseña'
             />
           </fieldset>
 
-          <fieldset>
+          <fieldset className={styles.fields}>
             <label htmlFor="password">
-              Confirm password:
+              
               <span onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                 {showConfirmPassword ? '👀' : '🔒'}
               </span>
@@ -118,6 +122,7 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
               id="confirm-password"
               value={confirmPassword}
               required
+              placeholder='Confirma tu contraseña'
               onChange={(e) => {
                 setConfirmPassword(e.target.value);
                 setPasswordMatch(e.target.value === password);
@@ -126,9 +131,9 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
             {!passwordMatch && <p>Las contraseñas no coinciden.</p>}
           </fieldset>
 
-          <div>
-            <button type="submit">Siguiente</button>
-          </div>
+         
+            <button type="submit" className={styles.btngrad}> Siguiente</button>
+         
         </form>
 
         <div>

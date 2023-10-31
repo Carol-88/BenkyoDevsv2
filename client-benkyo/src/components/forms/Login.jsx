@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import styles from './login.module.css'
+import Link from 'next/link'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -78,7 +79,12 @@ const Login = () => {
       </fieldset>
       <button className={styles.btngrad} type="submit">Continuar</button>
       {error && <p>{error}</p>}
+      <p>
+            ¿No tienes una cuenta?
+            <Link href="/register"> Regístrate</Link>
+      </p>
     </form>
+    
   );
 };
 
