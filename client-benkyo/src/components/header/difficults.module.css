@@ -12,3 +12,7 @@
     transition: filter 0.3s ease-in-out;
   }
   
+  .selected {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease-in-out;
+  }

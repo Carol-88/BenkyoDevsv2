@@ -22,7 +22,7 @@ const DIFICULTS = [
 
 const DifficultySelector = () => {
 
-  const [dificultIdSelected, setDificultIdSelected] = useState(DIFICULTS[0].id)
+  const [dificultIdSelected, setDificultIdSelected] = useState('')
 
   return (
     <section className={styles.difficults}>
@@ -33,7 +33,7 @@ const DifficultySelector = () => {
           <div
             key={id}
             onClick={() => setDificultIdSelected(id)}
-            className={styles.hoverdiff}
+            className={`${styles.hoverdiff} ${dificultIdSelected === id ? styles.selected : ''}`}
           >
             <Image  src={img} alt={name} width={70} height={70} />
           </div>
