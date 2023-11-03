@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Oxanium:wght@200;700;800&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    height: 10vh;
+    line-height: 9vh;
+    padding-left: 7rem;
+    display: flex;
+    flex-direction: row;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    list-style: none;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    padding: 15px;
+}
+
+.level {
+    border: none;
+}
+
+.level-img {
+    height: 70px;
+    width: 70px;
+}
+
+.level-img:hover {
+    cursor: pointer;
+  }
+
+main {
+    min-height: 90vh;
+    padding-top: 50px;
+    font-family: 'Lato';
+    font-size: 20px;
+    /* background-image: url(./img/retina_wood.png); */
+    background-color: rgb(127, 255, 187);
+}
+
+.question {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.question-text-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    min-height: 300px;
+    max-width: 1235px;
+    margin: 20px;
+    border-radius: 5px;
+    padding: 70px;
+}
+
+.answer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.answerA, .answerB {
+    background-color: white;
+    min-height: 300px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+    padding: 70px;
+    margin: 20px;
+    text-align: center;
+}
+
+footer {
+    height: 20vh;
+    background-color: rgba(27, 27, 27, 0.713);
+}
